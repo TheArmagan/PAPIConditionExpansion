@@ -7,6 +7,7 @@
 - You can use inline variables in everywhere in the text. (`{}`) 
 
 ### Conditional Checks (if/then/else)
+- Both `then` and `else` are optional.
 
 - `==`: Equals
   - Inputs: `a`, `b`
@@ -116,6 +117,10 @@
 
 ### Input Transformation
 - You can use input transformation on in every input key.
+- `if` are optional. Only `then` is required.
+- You can use multiple transformations by separating them with `,`.
+  - Example: `%condition_then:hello_then!options:lowercase,reverse%`
+
 
 - `lowercase`: Lowercase
   - Example: `%condition_then:HELLO_then!options:lowercase%` -> `hello`
