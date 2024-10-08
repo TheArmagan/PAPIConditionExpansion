@@ -1,0 +1,165 @@
+> # PAPI Condition* Expansion
+> This expansion allows you to do conditional checks on the placeholders.
+> Also allows you to do text transformations on the placeholders.
+> Created by TheArmagan with ❤️
+
+## Usage
+- You can use inline variables in everywhere in the text. (`{}`) 
+
+### Conditional Checks (if/then/else)
+
+- `==`: Equals
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:==_b:1_then:yep_else:nope%` -> `yep`
+- `!=`: Not Equals
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:!=_b:1_then:yep_else:nope%` -> `nope`
+- `>`: Greater Than
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:>_b:1_then:yep_else:nope%` -> `nope`
+- `<`: Less Than
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:<_b:1_then:yep_else:nope%` -> `nope`
+- `>=`: Greater Than or Equals
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:>=_b:1_then:yep_else:nope%` -> `yep`
+- `<=`: Less Than or Equals
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:<=_b:1_then:yep_else:nope%` -> `yep`
+- `&&`: And
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:true_if:&&_b:true_then:yep_else:nope%` -> `yep`
+- `||`: Or
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:true_if:||_b:false_then:yep_else:nope%` -> `yep`
+- `!`: Not
+  - Inputs: `a`
+  - Example: `%condition_a:true_if:!_then:yep_else:nope%` -> `nope`
+- `contains`: Contains
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:contains_b:ell_then:yep_else:nope%` -> `yep`
+- `notContains`: Not Contains
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:notContains_b:ell_then:yep_else:nope%` -> `nope`
+- `startsWith`: Starts With
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:startsWith_b:hel_then:yep_else:nope%` -> `yep`
+- `notStartsWith`: Not Starts With
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:notStartsWith_b:hel_then:yep_else:nope%` -> `nope`
+- `endsWith`: Ends With
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:endsWith_b:llo_then:yep_else:nope%` -> `yep`
+- `notEndsWith`: Not Ends With
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:notEndsWith_b:llo_then:yep_else:nope%` -> `nope`
+- `matches`: Matches
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:matches_b:hell._then:yep_else:nope%` -> `yep`
+- `notMatches`: Not Matches
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:notMatches_b:hell._then:yep_else:nope%` -> `nope`
+- `empty`: Empty
+  - Inputs: `a`
+  - Example: `%condition_a:_if:empty_then:yep_else:nope%` -> `yep`
+- `notEmpty`: Not Empty
+  - Inputs: `a`
+  - Example: `%condition_a:_if:notEmpty_then:yep_else:nope%` -> `nope`
+- `between`: Between
+  - Inputs: `a`, `b`, `c`
+  - Example: `%condition_a:5_if:between_b:1_c:10_then:yep_else:nope%` -> `yep`
+- `notBetween`: Not Between
+  - Inputs: `a`, `b`, `c`
+  - Example: `%condition_a:5_if:notBetween_b:1_c:10_then:yep_else:nope%` -> `nope`
+- `in`: In
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:in_b:1,2,3_then:yep_else:nope%` -> `yep`
+- `notIn`: Not In
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:1_if:notIn_b:1,2,3_then:yep_else:nope%` -> `nope`
+- `longer`: Longer
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:longer_b:hell_then:yep_else:nope%` -> `yep`
+- `shorter`: Shorter
+  - Inputs: `a`, `b`
+  - Example: `%condition_a:hello_if:shorter_b:hell_then:yep_else:nope%` -> `nope`
+- `isInteger`: Is Integer
+  - Inputs: `a`
+  - Example: `%condition_a:1_if:isInteger_then:yep_else:nope%` -> `yep`
+- `isNotInteger`: Is Not Integer
+  - Inputs: `a`
+  - Example: `%condition_a:1_if:isNotInteger_then:yep_else:nope%` -> `nope`
+- `isDouble`: Is Double
+  - Inputs: `a`
+  - Example: `%condition_a:1.0_if:isDouble_then:yep_else:nope%` -> `yep`
+- `isNotDouble`: Is Not Double
+  - Inputs: `a`
+  - Example: `%condition_a:1.0_if:isNotDouble_then:yep_else:nope%` -> `nope`
+- `isBoolean`: Is Boolean
+  - Inputs: `a`
+  - Example: `%condition_a:true_if:isBoolean_then:yep_else:nope%` -> `yep`
+- `isNotBoolean`: Is Not Boolean
+  - Inputs: `a`
+  - Example: `%condition_a:true_if:isNotBoolean_then:yep_else:nope%` -> `nope`
+- `isAlphabetic`: Is Alphabetic
+  - Inputs: `a`
+  - Example: `%condition_a:hello_if:isAlphabetic_then:yep_else:nope%` -> `yep`
+- `isNotAlphabetic`: Is Not Alphabetic
+  - Inputs: `a`
+  - Example: `%condition_a:hello_if:isNotAlphabetic_then:yep_else:nope%` -> `nope`
+- `isAlphanumeric`: Is Alpha Numeric
+  - Inputs: `a`
+  - Example: `%condition_a:hello1_if:isAlphanumeric_then:yep_else:nope%` -> `yep`
+- `isNotAlphanumeric`: Is Not Alpha Numeric
+  - Inputs: `a`
+  - Example: `%condition_a:hello1_if:isNotAlphanumeric_then:yep_else:nope%` -> `nope`
+
+### Input Transformation
+- You can use input transformation on in every input key.
+
+- `lowercase`: Lowercase
+  - Example: `%condition_then:HELLO_then!options:lowercase%` -> `hello`
+- `uppercase`: Uppercase
+  - Example: `%condition_then:hello_then!options:uppercase%` -> `HELLO`
+- `capitalize`: Capitalize
+  - Example: `%condition_then:hello_then!options:capitalize%` -> `Hello`
+- `reverse`: Reverse
+  - Example: `%condition_then:hello_then!options:reverse%` -> `olleh`
+- `trim`: Trim
+  - Example: `%condition_then: hello _then!options:trim%` -> `hello`
+- `trimStart`: Trim Start
+  - Example: `%condition_then: hello _then!options:trimStart%` -> `hello `
+- `trimEnd`: Trim End
+  - Example: `%condition_then: hello _then!options:trimEnd%` -> ` hello`
+- `replace`: Replace
+  - Inputs: `{key}!replaceFrom`, `{value}!replaceTo`
+  - Example: `%condition_then:hello_then!options:replace_then!replaceFrom:l_then!replaceTo:w%` -> `hewwo`
+- `stripColors`: Strip Colors
+  - Example: `%condition_then:&cHello &fWorld_then!options:stripColors%` -> `Hello World`
+- `substring`: Substring
+  - Inputs: `{key}!substringStart`, `{key}!substringEnd`
+  - Example: `%condition_then:hello_then!options:substring_then!substringStart:1_then!substringEnd:3%` -> `el`
+- `join`: Join
+  - Inputs: `{key}!joinSplitBy`, `{key}!joinWith`
+  - Example: `%condition_then:1,2,3,4_then!options:join_then!joinSplitBy:,_then!joinWith:-%` -> `1-2-3-4`
+- `toInt`: To Integer
+  - Example: `%condition_then:1_then!options:toInt%` -> `1`
+- `toDouble`: To Double
+  - Example: `%condition_then:1_then!options:toDouble%` -> `1.0`
+- `toBoolean`: To Boolean
+  - Example: `%condition_then:true_then!options:toBoolean%` -> `true`
+- `onlyNumbers`: Only Numbers
+  - Example: `%condition_then:1a2b3c_then!options:onlyNumbers%` -> `123`
+- `onlyLetters`: Only Letters
+  - Example: `%condition_then:1a2b3c_then!options:onlyLetters%` -> `abc`
+- `onlyAlphanumeric`: Only Alphanumeric
+  - Example: `%condition_then:1a2b3c_then!options:onlyAlphanumeric%` -> `1a2b3c`
+- `fancyText`: Fancy Text
+  - Inputs: `{key}!fancyFormat`
+  - Example: `%condition_then:hello_then!options:fancyText_then!fancyFormat:smallCaps%` -> `ʜᴇʟʟᴏ`
+  - Available Formats:
+    - `smallCaps`
+    - `round`
+- `repeat`: Repeat
+  - Inputs: `{key}!repeatTimes`
+  - Example: `%condition_then:hello_then!options:repeat_then!repeatTimes:3%` -> `hellohellohello`
