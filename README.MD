@@ -4,7 +4,8 @@
 > Created by TheArmagan with ❤️
 
 ## Usage
-- You can use inline variables in everywhere in the text. (`{}`) 
+- You can use inline variables in everywhere in the text. (`{}`)
+- Order of the inputs are not important.
 
 ### Conditional Checks (if/then/else)
 - Both `then` and `else` are optional.
