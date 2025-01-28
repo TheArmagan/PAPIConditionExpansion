@@ -16,7 +16,7 @@ class ConditionExpansion : PlaceholderExpansion() {
     }
 
     override fun getVersion(): String {
-        return "0.0.1"
+        return "0.0.2"
     }
 
     override fun onPlaceholderRequest(player: Player?, identifier: String): String {
@@ -165,8 +165,10 @@ class ConditionExpansion : PlaceholderExpansion() {
                 "stripColors" -> value = ChatColor.stripColor(value).toString()
                 "substring" -> {
                     var a = getValue(values, "${key}!substringStart").toInt()
+                    if (a > value.length) a = value.length - 1
                     if (a < 0) a = value.length - a;
                     var b = getValue(values, "${key}!substringEnd").toInt()
+                    if (b > value.length) b = value.length - 1
                     if (b < 0) b = value.length - b;
                     value = value.substring(a, b)
                 }
@@ -190,6 +192,21 @@ class ConditionExpansion : PlaceholderExpansion() {
                     val a = getValue(values, "${key}!repeatTimes")
                     value = value.repeat(a.toInt())
                 }
+                "marquee" -> {
+                    val marqueeLength = getValue(values, "${key}!marqueeVisibleLength").toInt();
+                    val spaceLength = getValue(values, "${key}!marqueeSpaceLength").toInt();
+                    var direction = getValue(values, "${key}!marqueeDirection");
+                    if (direction.isEmpty()) direction = "left";
+                    val position = getValue(values, "${key}!marqueePosition").toInt();
+
+                    value = Utils.marqueeAnimation(
+                        value,
+                        marqueeLength,
+                        spaceLength,
+                        direction,
+                        position
+                    );
+                }
             }
         }
 
@@ -201,9 +218,24 @@ class ConditionExpansion : PlaceholderExpansion() {
         val map = mutableMapOf<String, String>()
         for (part in parts) {
             val key = part.substring(0, part.indexOf(":"))
-            val value = part.substring(part.indexOf(":") + 1)
-            map[key] = value
+            var value = part.substring(part.indexOf(":") + 1)
+            value = mapReplace(
+                mapOf(
+                    "<colon>" to ":",
+                    "<underscore>" to "_",
+                    "<exclamation>" to "!",
+                    "<comma>" to ","
+                ),
+                value
+            );
+            map[key] = value;
         }
         return map
+    }
+
+    private fun mapReplace(map: Map<String, String>, text: String): String {
+        var result = text
+        map.forEach { (k, v) -> result = result.replace(k, v) }
+        return result
     }
 }
