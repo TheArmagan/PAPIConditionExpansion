@@ -217,8 +217,11 @@ class ConditionExpansion : PlaceholderExpansion() {
         val parts = identifier.split("_")
         val map = mutableMapOf<String, String>()
         for (part in parts) {
-            val key = part.substring(0, part.indexOf(":"))
-            var value = part.substring(part.indexOf(":") + 1)
+            val colonIndex = part.indexOf(":")
+            if (colonIndex == -1) continue
+
+            val key = part.substring(0, colonIndex)
+            var value = part.substring(colonIndex + 1)
             value = mapReplace(
                 mapOf(
                     "<colon>" to ":",
